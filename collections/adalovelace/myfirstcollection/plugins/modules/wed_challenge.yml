@@ -1,0 +1,30 @@
+---
+
+ - name: wed_challenge
+   hosts: planetexpress
+   connection: ansible.builtin.ssh
+
+ # vars_files expects a list of 1 or more files
+   vars_files:
+     - /home/student/mycode/vars/wed_challenge_names.yml
+
+   tasks:
+    #Use the package module to install figlet
+   - name: Install figlet
+     ansible.builtin.package:
+       name: figlet
+       state: present
+     become: yes    
+
+   - name: Add newuser to target hosts
+     ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+        shell: /bin/bash
+     become: yes
+     loop: "{{ users }}"
+
+#print  have comppleted the challenge!
+   - name: challenge completed
+     ansible.builtin.debug:
+        msg: "Ihave comppleted the challenge!"
