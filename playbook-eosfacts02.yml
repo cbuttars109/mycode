@@ -17,7 +17,7 @@
   tasks:
   - name: Gather EOS facts
     eos_facts:
-      gather_subset: all
+      gather_subset: min
 
   - name: Show registered facts
     debug:
